@@ -2,9 +2,8 @@ package handler
 
 import (
 	"net/http"
-	"os"
-	"strconv"
 
+	"concurrent-data/internal/config"
 	"concurrent-data/internal/service"
 
 	"github.com/gin-gonic/gin"
@@ -36,11 +35,11 @@ func (h *ProcessorHandler) GetProgress(ctx *gin.Context) {
 // @Success 200 {array} service.Result
 // @Router /process [post]
 func (h *ProcessorHandler) ProcessFiles(ctx *gin.Context) {
-	csvPath := os.Getenv("CSV_PATH")
+	csvPath := config.AppConfig.CSVPath
 	if csvPath == "" {
 		csvPath = "sample_data"
 	}
-	workers, _ := strconv.Atoi(os.Getenv("WORKERS"))
+	workers := config.AppConfig.Workers
 	if workers == 0 {
 		workers = 4
 	}
