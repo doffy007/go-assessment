@@ -1,0 +1,79 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Concurrent CSV processor with worker pool and REST interface",
+        "title": "Concurrent Data Processing API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/v1",
+    "paths": {
+        "/process": {
+            "post": {
+                "description": "Trigger worker pool to process all CSV files",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Processor"
+                ],
+                "summary": "Start concurrent CSV processing",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/service.Result"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/progress": {
+            "get": {
+                "description": "Returns how many records have been processed so far",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Processor"
+                ],
+                "summary": "Get processing progress",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "service.Result": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "file": {
+                    "type": "string"
+                },
+                "progress": {
+                    "type": "integer"
+                },
+                "rows": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

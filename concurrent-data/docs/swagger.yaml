@@ -1,0 +1,52 @@
+basePath: /v1
+definitions:
+  service.Result:
+    properties:
+      error:
+        type: string
+      file:
+        type: string
+      progress:
+        type: integer
+      rows:
+        type: integer
+      status:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Concurrent CSV processor with worker pool and REST interface
+  title: Concurrent Data Processing API
+  version: "1.0"
+paths:
+  /process:
+    post:
+      description: Trigger worker pool to process all CSV files
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/service.Result'
+            type: array
+      summary: Start concurrent CSV processing
+      tags:
+      - Processor
+  /progress:
+    get:
+      description: Returns how many records have been processed so far
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get processing progress
+      tags:
+      - Processor
+swagger: "2.0"
