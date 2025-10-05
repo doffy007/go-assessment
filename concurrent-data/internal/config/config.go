@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	CSVPath string `envconfig:"CSV_PATH" default:"sample_data"`
+	CSVPath string `envconfig:"CSV_PATH" default:"sample"`
 	Workers int    `envconfig:"WORKERS" default:"4"`
 	Port    int    `envconfig:"PORT" default:"8080"`
 }

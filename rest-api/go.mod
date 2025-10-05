@@ -4,6 +4,7 @@ go 1.24.2
 
 require (
 	github.com/avast/retry-go v3.0.0+incompatible
+	github.com/gin-contrib/cors v1.7.6
 	github.com/gin-contrib/pprof v1.5.3
 	github.com/gin-gonic/gin v1.11.0
 	github.com/golang-jwt/jwt/v5 v5.3.0

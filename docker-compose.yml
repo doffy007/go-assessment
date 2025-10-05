@@ -1,0 +1,65 @@
+volumes:
+  pgdata:
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rest-api:
+    build: ./rest-api
+    environment:
+      DATABASE_DSN: ${DATABASE_DSN}
+      SERVER_PORT: ${SERVER_PORT}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      ENV_TYPE: ${ENV_TYPE}
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    volumes:
+      - ./rest-api/.env:/app/.env
+    working_dir: /app
+    command: ["./api"]
+
+  migrate:
+    image: migrate/migrate:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./rest-api/migrations:/migrations
+    entrypoint: ["migrate"]
+    command: ["-path=/migrations", "-database=${DATABASE_DSN}", "up"]
+
+  processor:
+    build: ./concurrent-data
+    environment:
+      CSV_PATH: ${CSV_PATH}
+      WORKERS: ${WORKERS}
+      PORT: ${PORT}
+      ENV_TYPE: ${ENV_TYPE}
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ./concurrent-data/.env:/app/.env
+      - ./concurrent-data/sample:/app/sample
+    working_dir: /app
+    restart: "no"
+    command: ["./processor"]

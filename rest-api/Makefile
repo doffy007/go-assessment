@@ -29,3 +29,11 @@ build:
 
 build-run: build
 	godotenv ./api
+
+docker-build:
+	docker build -t rest-api:latest .
+
+docker-run:
+	docker run --rm -p 8080:8080 \
+		--env-file .env \
+		rest-api:latest

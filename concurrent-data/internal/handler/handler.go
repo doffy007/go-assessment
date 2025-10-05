@@ -36,13 +36,7 @@ func (h *ProcessorHandler) GetProgress(ctx *gin.Context) {
 // @Router /process [post]
 func (h *ProcessorHandler) ProcessFiles(ctx *gin.Context) {
 	csvPath := config.AppConfig.CSVPath
-	if csvPath == "" {
-		csvPath = "sample_data"
-	}
 	workers := config.AppConfig.Workers
-	if workers == 0 {
-		workers = 4
-	}
 
 	results, err := service.ProcessFiles(csvPath, workers)
 	if err != nil {

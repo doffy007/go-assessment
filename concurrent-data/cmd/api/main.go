@@ -1,7 +1,7 @@
 // @title Concurrent Data Processing API
 // @version 1.0
 // @description Concurrent CSV processor with worker pool and REST interface
-// @host localhost:8080
+// @host localhost:8090
 // @BasePath /v1
 package main
 
@@ -20,6 +20,7 @@ import (
 
 	_ "concurrent-data/docs"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
@@ -33,12 +34,25 @@ func main() {
 
 	router := gin.New()
 	router.Use(gin.Logger(), gin.Recovery())
+
 	pprof.Register(router)
 
-	// swagger
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// CORS config
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:8090"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
-	// health check
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.GET("/swagger", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
+	})
+
+	// Health check
 	router.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"success": true})
 	})
@@ -59,7 +73,7 @@ func main() {
 		}
 	}()
 
-	// graceful shutdown
+	// Graceful shutdown
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
