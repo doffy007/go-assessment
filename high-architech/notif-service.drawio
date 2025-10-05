@@ -1,0 +1,19 @@
+<mxfile host="65bd71144e">
+    <diagram id="SAWl6-hLM2PNOQEmdFMS" name="Page-1">
+        <mxGraphModel dx="474" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Notif Service&lt;div&gt;-listen event&lt;/div&gt;&lt;div&gt;order confirm&lt;/div&gt;&lt;div&gt;order cancelled&lt;/div&gt;&lt;div&gt;- send push/sms etc&lt;/div&gt;&lt;div&gt;-log&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="40" width="120" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="notif db&lt;div&gt;id&lt;/div&gt;&lt;div&gt;order&lt;/div&gt;&lt;div&gt;user&lt;/div&gt;&lt;div&gt;type&lt;/div&gt;&lt;div&gt;status&lt;/div&gt;&lt;div&gt;timestamptz&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="320" width="120" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;div&gt;event bus&lt;/div&gt;&lt;div&gt;-subscribe&lt;/div&gt;&lt;div&gt;-distributed log&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="600" width="120" height="200" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

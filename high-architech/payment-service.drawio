@@ -1,0 +1,31 @@
+<mxfile host="65bd71144e">
+    <diagram id="qQUSizw82iy84XHZOIZ4" name="Page-1">
+        <mxGraphModel dx="474" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Payment Service&lt;div&gt;Listen Event&lt;/div&gt;&lt;div&gt;-Stock Reserved&lt;/div&gt;&lt;div&gt;- Order cancelled&lt;/div&gt;&lt;div&gt;Charge Payment&lt;/div&gt;&lt;div&gt;Refund Payment&lt;/div&gt;&lt;div&gt;Publish Event:&lt;/div&gt;&lt;div&gt;-Payment success&lt;/div&gt;&lt;div&gt;-Payment Failed&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="40" width="160" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;div&gt;Payment Database&lt;/div&gt;&lt;div&gt;id&lt;/div&gt;&lt;div&gt;order id&amp;nbsp;&lt;/div&gt;&lt;div&gt;user id&lt;/div&gt;&lt;div&gt;amount&lt;/div&gt;&lt;div&gt;status (success/failed)&lt;/div&gt;&lt;div&gt;timestamptz&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="360" width="160" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;div&gt;Event bus&lt;/div&gt;&lt;div&gt;Publish/subs&lt;/div&gt;&lt;div&gt;Payment_success&lt;/div&gt;&lt;div&gt;payment_failed&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="680" width="160" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="3">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="360" y="310" as="sourcePoint"/>
+                        <mxPoint x="370" y="350" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="359.5" y="600" as="sourcePoint"/>
+                        <mxPoint x="359.5" y="680" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
